@@ -1,30 +1,80 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from '@/components/ui/icon';
+import { motion } from 'framer-motion';
 
 const BottomNavigation = () => {
+  const [activeTab, setActiveTab] = useState('menu');
+  
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-10">
-      <div className="flex items-center justify-around py-2">
-        <button className="flex flex-col items-center text-blue-500 py-1 px-4">
-          <Icon name="Menu" size={24} />
-          <span className="text-xs mt-1">Меню</span>
-        </button>
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-10 shadow-lg rounded-t-xl">
+      <div className="flex items-center justify-around py-2 px-4">
+        <NavButton 
+          icon="Menu" 
+          label="Меню" 
+          isActive={activeTab === 'menu'} 
+          onClick={() => setActiveTab('menu')} 
+        />
         
-        <button className="flex flex-col items-center text-gray-400 py-1 px-4">
-          <Icon name="User" size={24} />
-          <span className="text-xs mt-1">Профиль</span>
-        </button>
+        <NavButton 
+          icon="User" 
+          label="Профиль" 
+          isActive={activeTab === 'profile'} 
+          onClick={() => setActiveTab('profile')} 
+        />
         
-        <button className="flex flex-col items-center text-gray-400 py-1 px-4">
-          <Icon name="ShoppingCart" size={24} />
-          <span className="text-xs mt-1">Корзина</span>
-        </button>
+        <NavButton 
+          icon="ShoppingCart" 
+          label="Корзина" 
+          isActive={activeTab === 'cart'} 
+          onClick={() => setActiveTab('cart')} 
+          badge={3}
+        />
       </div>
       
       {/* This is the bottom safe area / home indicator spacer */}
-      <div className="h-[5px] bg-black w-[30%] mx-auto rounded-full mb-1" />
+      <div className="h-1 w-[134px] bg-black/80 mx-auto mb-2 rounded-full" />
     </div>
+  );
+};
+
+interface NavButtonProps {
+  icon: string;
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+  badge?: number;
+}
+
+const NavButton: React.FC<NavButtonProps> = ({ icon, label, isActive, onClick, badge }) => {
+  return (
+    <motion.button 
+      className={`relative flex flex-col items-center py-2 px-6 rounded-xl ${
+        isActive ? 'text-red-500' : 'text-gray-400'
+      }`}
+      onClick={onClick}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div className="relative">
+        <Icon name={icon} size={24} />
+        {badge && (
+          <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-medium text-white">
+            {badge}
+          </span>
+        )}
+      </div>
+      <span className={`text-xs mt-1 font-medium ${isActive ? 'text-red-500' : 'text-gray-500'}`}>
+        {label}
+      </span>
+      
+      {isActive && (
+        <motion.div 
+          className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-red-500 rounded-full" 
+          layoutId="navIndicator"
+          style={{ x: '-50%' }}
+        />
+      )}
+    </motion.button>
   );
 };
 

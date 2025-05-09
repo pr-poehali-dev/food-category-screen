@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { motion } from 'framer-motion';
 
 interface FoodCardProps {
   image: string;
@@ -21,39 +22,47 @@ const FoodCard: React.FC<FoodCardProps> = ({
   discount
 }) => {
   return (
-    <Card className="overflow-hidden border-none shadow-sm">
-      <div className="relative">
-        <img 
-          src={image} 
-          alt={title} 
-          className="w-full aspect-square object-cover"
-        />
-        {discount && (
-          <div className="absolute bottom-2 left-2 bg-red-500 text-white px-2 py-1 text-sm font-bold rounded">
-            - {discount}%
-          </div>
-        )}
-      </div>
-      
-      <CardContent className="p-3">
-        <h3 className="font-bold text-lg mb-1">{title}</h3>
-        <p className="text-sm text-gray-600 mb-2">{description}</p>
-        <div className="flex items-center gap-2">
-          <span className="text-lg font-bold">{price.toFixed(2)}</span>
-          {oldPrice && (
-            <span className="text-sm text-gray-500 line-through">
-              {oldPrice.toFixed(2)}
-            </span>
+    <motion.div
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
+      <Card className="overflow-hidden border-none rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div className="relative">
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full aspect-square object-cover"
+          />
+          {discount && (
+            <div className="absolute bottom-3 left-3 bg-red-500 text-white px-2.5 py-1 text-xs font-bold rounded-full shadow-sm">
+              -{discount}%
+            </div>
           )}
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
         </div>
-      </CardContent>
-      
-      <CardFooter className="p-3 pt-0">
-        <Button className="w-full bg-red-500 hover:bg-red-600">
-          Выбрать
-        </Button>
-      </CardFooter>
-    </Card>
+        
+        <CardContent className="p-4">
+          <h3 className="font-bold text-lg mb-1.5 line-clamp-1">{title}</h3>
+          <p className="text-sm text-gray-600 mb-3 line-clamp-2 min-h-[2.5rem]">{description}</p>
+          
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold">{price.toFixed(2)}</span>
+              {oldPrice && (
+                <span className="text-sm text-gray-500 line-through">
+                  {oldPrice.toFixed(2)}
+                </span>
+              )}
+            </div>
+            
+            <Button className="bg-red-500 hover:bg-red-600 rounded-full px-4 shadow-sm font-medium">
+              Выбрать
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
 
