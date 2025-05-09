@@ -13,26 +13,29 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 346 75% 46%;
+    /* Яркий фиолетовый как основной бренд-цвет */
+    --primary: 265 89% 54%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    /* Мятно-зеленый для акцентов */
+    --secondary: 160 84% 39%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    /* Неоновый цвет для акцентов UI */
+    --accent: 191 96% 41%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 359 85% 59%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 346 75% 46%;
+    --ring: 265 89% 54%;
 
-    --radius: 1rem;
+    --radius: 1.5rem;
   }
 
   .dark {
@@ -45,24 +48,24 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 346 75% 46%;
+    --primary: 265 89% 54%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 3.7% 15.9%;
+    --secondary: 160 84% 39%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 240 3.7% 15.9%;
+    --accent: 191 96% 41%;
     --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 359 85% 59%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 346 75% 46%;
+    --ring: 265 89% 54%;
   }
 }
 
@@ -76,7 +79,49 @@
   }
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Пользовательские градиенты для молодежного стиля */
+@layer utilities {
+  .bg-gradient-party {
+    @apply bg-gradient-to-tr from-purple-600 via-pink-500 to-orange-400;
+  }
+
+  .bg-gradient-neon {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600;
+  }
+
+  .bg-gradient-fresh {
+    @apply bg-gradient-to-r from-green-400 to-cyan-400;
+  }
+
+  .text-gradient-party {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400;
+  }
+
+  .text-gradient-neon {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600;
+  }
+}
+
+/* Эффекты неоновых теней */
+.neon-shadow-purple {
+  box-shadow:
+    0 0 5px theme("colors.purple.500"),
+    0 0 20px theme("colors.purple.500/50");
+}
+
+.neon-shadow-blue {
+  box-shadow:
+    0 0 5px theme("colors.blue.500"),
+    0 0 20px theme("colors.blue.500/50");
+}
+
+.neon-shadow-pink {
+  box-shadow:
+    0 0 5px theme("colors.pink.500"),
+    0 0 20px theme("colors.pink.500/50");
+}
+
+/* Стили для скроллбара */
 @layer utilities {
   ::-webkit-scrollbar {
     width: 6px;
@@ -84,15 +129,35 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: theme("colors.gray.100");
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #cbcbcb;
+    background: theme("colors.purple.400");
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #aaaaaa;
+    background: theme("colors.purple.600");
+  }
+}
+
+/* Анимированный фон с градиентом */
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

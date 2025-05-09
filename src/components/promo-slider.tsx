@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 interface Promo {
@@ -10,6 +11,7 @@ interface Promo {
   subtitle: string;
   image: string;
   gradientColor: string;
+  badge?: string;
 }
 
 interface PromoSliderProps {
@@ -32,12 +34,14 @@ export default function PromoSlider({ promos, className }: PromoSliderProps) {
         <CarouselContent className="-ml-4">
           {promos.map((promo) => (
             <CarouselItem key={promo.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-              <Card className="overflow-hidden border-none h-full">
-                <div className="relative aspect-[16/7] overflow-hidden">
+              <Card 
+                className="overflow-hidden border-none shadow-lg h-full rounded-3xl group"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden">
                   <img
                     src={promo.image}
                     alt={promo.title}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div 
                     className={cn(
@@ -45,10 +49,21 @@ export default function PromoSlider({ promos, className }: PromoSliderProps) {
                       promo.gradientColor
                     )}
                   >
-                    <div className="text-white">
-                      <h3 className="text-2xl font-bold">{promo.title}</h3>
-                      <p className="mt-1 text-sm font-medium opacity-90">{promo.subtitle}</p>
+                    <div className="text-white z-10">
+                      <div className="mb-2">
+                        {promo.badge && (
+                          <Badge variant="hot" className="mb-2 uppercase font-bold">
+                            {promo.badge}
+                          </Badge>
+                        )}
+                      </div>
+                      <h3 className="text-2xl font-black">{promo.title}</h3>
+                      <p className="mt-1 font-medium opacity-90">{promo.subtitle}</p>
                     </div>
+                    
+                    {/* Декоративные элементы */}
+                    <div className="absolute -right-10 -top-10 h-36 w-36 bg-white/20 blur-3xl rounded-full" />
+                    <div className="absolute -bottom-10 -left-10 h-36 w-36 bg-black/20 blur-3xl rounded-full" />
                   </div>
                 </div>
               </Card>
@@ -57,15 +72,15 @@ export default function PromoSlider({ promos, className }: PromoSliderProps) {
         </CarouselContent>
       </Carousel>
       
-      <div className="mt-3 flex justify-center gap-1.5">
+      <div className="mt-4 flex justify-center gap-2">
         {promos.map((_, index) => (
           <div
             key={index}
             className={cn(
-              "h-1.5 rounded-full transition-all duration-300",
+              "h-2 rounded-full transition-all duration-300",
               index === current 
-                ? "w-4 bg-primary" 
-                : "w-1.5 bg-primary/25"
+                ? "w-8 bg-gradient-party" 
+                : "w-2 bg-purple-200"
             )}
           />
         ))}

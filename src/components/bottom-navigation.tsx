@@ -3,6 +3,7 @@ import React from 'react';
 import Icon from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { motion } from 'framer-motion';
 
 interface NavItem {
   id: string;
@@ -25,7 +26,10 @@ export default function BottomNavigation({
   className 
 }: BottomNavigationProps) {
   return (
-    <div className={cn("fixed bottom-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-lg border-t shadow-sm", className)}>
+    <div className={cn(
+      "fixed bottom-0 left-0 right-0 z-40 bg-background/70 backdrop-blur-xl border-t border-purple-200/20 shadow-lg",
+      className
+    )}>
       <div className="container flex items-center justify-between px-4 pb-6 pt-2">
         {items.map((item) => (
           <NavButton
@@ -38,10 +42,16 @@ export default function BottomNavigation({
           />
         ))}
       </div>
-      <div className="absolute -top-5 left-1/2 h-10 w-10 -translate-x-1/2 rounded-full bg-primary shadow-md flex items-center justify-center">
-        <Icon name="ShoppingBag" className="h-5 w-5 text-primary-foreground" />
-      </div>
-      <div className="h-1 w-14 bg-black/70 mx-auto mb-1 rounded-full" />
+      <motion.div 
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute -top-7 left-1/2 h-14 w-14 -translate-x-1/2 rounded-full bg-gradient-party shadow-lg neon-shadow-purple flex items-center justify-center"
+      >
+        <Icon name="ShoppingBag" className="h-6 w-6 text-white" />
+      </motion.div>
+      <div className="h-1 w-16 bg-black/70 mx-auto mb-1 rounded-full" />
     </div>
   );
 }
@@ -65,17 +75,20 @@ function NavButton({ icon, label, isActive, badge, onClick }: NavButtonProps) {
       onClick={onClick}
     >
       <div className="relative">
-        <Icon name={icon} className="h-5 w-5" />
+        <Icon name={icon} className="h-6 w-6" />
         {badge !== undefined && badge > 0 && (
-          <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-party text-[10px] font-bold text-white shadow-md">
             {badge}
           </span>
         )}
       </div>
-      <span className="text-[10px] font-medium">{label}</span>
+      <span className="text-[10px] font-bold">{label}</span>
       
       {isActive && (
-        <span className="absolute -bottom-0.5 left-1/2 h-1 w-4 -translate-x-1/2 rounded-full bg-primary" />
+        <motion.span 
+          layoutId="activeTab"
+          className="absolute -bottom-0.5 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-gradient-party" 
+        />
       )}
     </Button>
   );

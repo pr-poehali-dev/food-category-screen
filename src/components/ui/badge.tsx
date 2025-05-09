@@ -17,6 +17,11 @@ const badgeVariants = cva(
         outline: "text-foreground",
         success:
           "border-transparent bg-emerald-500 text-white hover:bg-emerald-500/80",
+        // Молодежные варианты
+        hot: "border-transparent bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-sm hover:shadow-md",
+        new: "border-transparent bg-gradient-to-r from-blue-500 to-violet-500 text-white shadow-sm hover:shadow-md",
+        trendy:
+          "border-transparent bg-gradient-to-r from-teal-400 to-blue-400 text-white shadow-sm hover:shadow-md",
       },
     },
     defaultVariants: {
