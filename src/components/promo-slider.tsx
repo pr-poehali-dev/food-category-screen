@@ -35,7 +35,7 @@ export default function PromoSlider({ promos, className }: PromoSliderProps) {
           {promos.map((promo) => (
             <CarouselItem key={promo.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
               <Card 
-                className="overflow-hidden border-none shadow-lg h-full rounded-3xl group"
+                className="overflow-hidden border-none shadow-lg h-full rounded-3xl group transform transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <img

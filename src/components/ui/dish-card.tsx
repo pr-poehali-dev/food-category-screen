@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Icon from "@/components/ui/icon"
-import { motion } from 'framer-motion'
 
 interface DishCardProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string
@@ -34,12 +33,9 @@ export function DishCard({
   ...props
 }: DishCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
+    <div
       className={cn(
-        "group relative overflow-hidden rounded-3xl bg-background border-none shadow-lg", 
+        "group relative overflow-hidden rounded-3xl bg-background border-none shadow-lg transform transition-all duration-300 hover:-translate-y-2 active:scale-98", 
         className
       )} 
       {...props}
@@ -116,6 +112,6 @@ export function DishCard({
           </Button>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
