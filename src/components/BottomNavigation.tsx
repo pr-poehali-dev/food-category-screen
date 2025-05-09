@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/icon';
-import { motion } from 'framer-motion';
 
 const BottomNavigation = () => {
   const [activeTab, setActiveTab] = useState('menu');
@@ -48,12 +47,11 @@ interface NavButtonProps {
 
 const NavButton: React.FC<NavButtonProps> = ({ icon, label, isActive, onClick, badge }) => {
   return (
-    <motion.button 
-      className={`relative flex flex-col items-center py-2 px-6 rounded-xl ${
+    <button 
+      className={`relative flex flex-col items-center py-2 px-6 rounded-xl transition-transform active:scale-95 ${
         isActive ? 'text-red-500' : 'text-gray-400'
       }`}
       onClick={onClick}
-      whileTap={{ scale: 0.95 }}
     >
       <div className="relative">
         <Icon name={icon} size={24} />
@@ -68,13 +66,12 @@ const NavButton: React.FC<NavButtonProps> = ({ icon, label, isActive, onClick, b
       </span>
       
       {isActive && (
-        <motion.div 
-          className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-red-500 rounded-full" 
-          layoutId="navIndicator"
-          style={{ x: '-50%' }}
+        <div 
+          className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-red-500 rounded-full transition-all duration-300" 
+          style={{ transform: 'translateX(-50%)' }}
         />
       )}
-    </motion.button>
+    </button>
   );
 };
 

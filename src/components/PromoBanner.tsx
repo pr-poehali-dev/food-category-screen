@@ -7,7 +7,6 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from '@/components/ui/carousel';
-import { motion } from 'framer-motion';
 
 const banners = [
   {
@@ -52,10 +51,8 @@ const PromoBanner = () => {
         <CarouselContent className="-ml-2">
           {banners.map((banner) => (
             <CarouselItem key={banner.id} className="pl-2 md:basis-1/2 lg:basis-1/3">
-              <motion.div 
-                className="rounded-xl overflow-hidden aspect-[5/2] relative shadow-md"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              <div 
+                className="rounded-xl overflow-hidden aspect-[5/2] relative shadow-md transition-all duration-300 hover:scale-[1.02]"
               >
                 <img 
                   src={banner.image} 
@@ -68,7 +65,7 @@ const PromoBanner = () => {
                     <p className="text-sm font-medium opacity-90 mt-1">{banner.subtitle}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

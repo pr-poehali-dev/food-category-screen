@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { motion } from 'framer-motion';
 
 interface FoodCardProps {
   image: string;
@@ -22,10 +21,7 @@ const FoodCard: React.FC<FoodCardProps> = ({
   discount
 }) => {
   return (
-    <motion.div
-      whileHover={{ y: -5 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-    >
+    <div className="transition-all duration-300 hover:-translate-y-1">
       <Card className="overflow-hidden border-none rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
         <div className="relative">
           <img 
@@ -56,13 +52,13 @@ const FoodCard: React.FC<FoodCardProps> = ({
               )}
             </div>
             
-            <Button className="bg-red-500 hover:bg-red-600 rounded-full px-4 shadow-sm font-medium">
+            <Button className="bg-red-500 hover:bg-red-600 rounded-full px-4 shadow-sm font-medium transition-transform active:scale-95">
               Выбрать
             </Button>
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 };
 

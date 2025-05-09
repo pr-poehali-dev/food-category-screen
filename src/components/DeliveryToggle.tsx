@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/icon';
-import { motion } from 'framer-motion';
 
 const DeliveryToggle = () => {
   const [deliveryType, setDeliveryType] = useState<'delivery' | 'pickup'>('delivery');
@@ -9,12 +8,11 @@ const DeliveryToggle = () => {
   return (
     <div className="mx-4 mb-6 mt-3 overflow-hidden rounded-xl border border-gray-200 shadow-sm">
       <div className="relative grid grid-cols-2">
-        {/* Animated background indicator */}
-        <motion.div 
-          className="absolute h-full rounded-lg bg-white"
-          initial={{ x: deliveryType === 'delivery' ? 0 : '100%' }}
-          animate={{ x: deliveryType === 'delivery' ? 0 : '100%' }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        {/* Background indicator */}
+        <div 
+          className={`absolute h-full rounded-lg bg-white transition-all duration-300 ease-in-out ${
+            deliveryType === 'delivery' ? 'left-0' : 'left-1/2'
+          }`}
           style={{ width: '50%' }}
         />
         

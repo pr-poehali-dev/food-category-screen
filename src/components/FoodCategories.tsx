@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { motion } from 'framer-motion';
 
 const categories = [
   { id: 1, name: "Комбо", icon: "🍱" },
@@ -21,20 +20,18 @@ const FoodCategories = () => {
       <ScrollArea className="w-full whitespace-nowrap">
         <div className="flex w-max space-x-3 px-4">
           {categories.map((category) => (
-            <motion.button
+            <button
               key={category.id}
-              className={`flex items-center gap-2 flex-shrink-0 rounded-full px-5 py-2.5 font-medium border transition-all ${
+              className={`flex items-center gap-2 flex-shrink-0 rounded-full px-5 py-2.5 font-medium border transition-all duration-200 hover:-translate-y-1 active:scale-95 ${
                 activeCategory === category.id
                   ? 'bg-black text-white border-black shadow-md'
                   : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }`}
               onClick={() => setActiveCategory(category.id)}
-              whileTap={{ scale: 0.95 }}
-              whileHover={activeCategory !== category.id ? { y: -2 } : {}}
             >
               <span className="text-base">{category.icon}</span>
               {category.name}
-            </motion.button>
+            </button>
           ))}
         </div>
         <ScrollBar orientation="horizontal" className="hidden" />
