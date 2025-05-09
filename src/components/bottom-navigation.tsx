@@ -3,7 +3,6 @@ import React from 'react';
 import Icon from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { motion } from 'framer-motion';
 
 interface NavItem {
   id: string;
@@ -42,15 +41,11 @@ export default function BottomNavigation({
           />
         ))}
       </div>
-      <motion.div 
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="absolute -top-7 left-1/2 h-14 w-14 -translate-x-1/2 rounded-full bg-gradient-party shadow-lg neon-shadow-purple flex items-center justify-center"
+      <div 
+        className="absolute -top-7 left-1/2 h-14 w-14 -translate-x-1/2 rounded-full bg-gradient-party shadow-lg neon-shadow-purple flex items-center justify-center transform transition-transform duration-300 hover:scale-110 active:scale-90"
       >
         <Icon name="ShoppingBag" className="h-6 w-6 text-white" />
-      </motion.div>
+      </div>
       <div className="h-1 w-16 bg-black/70 mx-auto mb-1 rounded-full" />
     </div>
   );
@@ -85,9 +80,8 @@ function NavButton({ icon, label, isActive, badge, onClick }: NavButtonProps) {
       <span className="text-[10px] font-bold">{label}</span>
       
       {isActive && (
-        <motion.span 
-          layoutId="activeTab"
-          className="absolute -bottom-0.5 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-gradient-party" 
+        <span 
+          className="absolute -bottom-0.5 left-1/2 h-1 w-5 -translate-x-1/2 rounded-full bg-gradient-party transition-all duration-300" 
         />
       )}
     </Button>
